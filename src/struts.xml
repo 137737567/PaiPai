@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" "struts-2.3.dtd" >
+<struts>
+	<package name="dafault" namespace="/" extends="struts-default">
+		<!-- 普通用户登录 -->
+		<action name="UserLogin" class="service.UserLoginAction">
+			<result name="success" type="redirectAction">find</result>
+			<result name="input">/index.jsp</result>
+		</action>
+		
+		<!-- 普通用户注册 -->
+		<action name="Register" class="service.RegisterAction">
+			<result name="success" type="redirectAction">UserLogin</result>
+			<result name="input">/Register.jsp</result>
+		</action>
+		
+		<!-- 管理员登陆 -->
+		<action name="AdminLogin" class="service.AdminLoginAction">
+			<result name="success" type="redirectAction">Afind</result>
+			<result name="input">/Admin.jsp</result>
+		</action>
+		
+		<!-- 查询拍品 -->
+		<action name="find" class="service.FindAction">
+			<result name="success">/List.jsp</result>
+		</action>
+		
+		<!-- 管理查询拍品 -->
+		<action name="Afind" class="service.FindAction">
+			<result name="success">/AdminList.jsp</result>
+		</action>
+		
+		<!-- 上传拍品 -->
+		<action name="Upload" class="service.UploadAction">
+			<result name="success" type="redirectAction">find</result>
+		</action>
+		
+		
+		<!-- 删除拍品 -->
+		<action name="Delete" class="service.DeleteAction">
+			<result name="success" type="redirectAction">Afind</result>
+		</action>
+	</package>
+	<constant name="struts.custom.i18n.resources" value="message"></constant>
+</struts>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="entity">
+	<!-- 配置USER实体一对多映射 -->
+	<class name="User" table="PUSER">
+		<id name="UserId" type="java.lang.Integer" column="USERID">
+			<generator class="assigned"></generator>
+		</id>
+		<property name="userName" type="java.lang.String" column="USERNAME"></property>
+		<property name="passWord" type="java.lang.String" column="PASSWORD"></property>
+		<set name="goods">
+			<key column="USERID"></key>
+			<one-to-many class="Goods"/>
+		</set>
+	</class>
+	
+	<!-- 配置ADMIN实体一对多映射 -->
+	<class name="Admin" table="ADMIN">
+		<id name="adminId" type="java.lang.Integer" column="ADMINID">
+			<generator class="assigned"></generator>
+		</id>
+		<property name="name" type="java.lang.String" column="NAME"></property>
+		<property name="passWord" type="java.lang.String" column="PASSWORD"></property>
+	</class>
+	
+	<!-- 商品实体 -->
+	<class name="Goods" table="GOODS">
+		<id name="goodsId" type="java.lang.Integer" column="GOODSID">
+			<generator class="assigned"></generator>
+		</id>
+		<property name="gName" type="java.lang.String" column="GNAME"></property>
+		<property name="describe" type="java.lang.String" column="DESCRIBE"></property>
+		<property name="sTime" type="java.util.Date" column="STIME"></property>
+		<property name="eTime" type="java.util.Date" column="ETIME"></property>
+		<property name="startPrice" type="java.lang.Double" column="STARTPRICE"></property>
+		<property name="nowPrice" type="java.lang.Double" column="NOWPRICE"></property>
+		<!-- 多对一关联映射 USER -->
+		<many-to-one name="user" class="User" column="USERID"></many-to-one>
+	</class>
+</hibernate-mapping>
